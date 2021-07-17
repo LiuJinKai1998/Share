@@ -1,0 +1,248 @@
+@media screen and (max-width:320px ) {
+	.m-navlist{font-size: 5px;}
+}
+@media screen and (min-width: 320px) and (max-width: 640px) {
+	.m-navlist{font-size: 6px;}
+}
+@media screen and (min-width:750px ) {
+	.m-navlist{font-size: 8px;}
+}
+body{margin: 0 auto;background-color: #fcfcfc;}
+img{
+	width: 100%;
+	height: auto;
+	margin: 0;
+	padding: 0;
+}
+*{padding: 0;margin: 0;}
+a{text-decoration: none;color: black;}
+ul,li{text-decoration: none;list-style: none;margin: 0;padding: 0;}
+/* ########################## */
+.header{
+	width: 100%;
+	height: .8rem;
+	color: #999999;
+	position: fixed;
+	top: 0;
+	z-index: 9999;
+	background-color: rgba(255,255,255,.9);
+	border-bottom:1px solid #F0F0F0 ;
+}
+.header-con{
+	margin: 0 auto;
+	width: 10rem;
+	height: .8rem;
+	font-size: .19rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.header-icon{
+	font-size: .3rem;
+	color: orange;
+}
+.header-nav{
+	width: 4rem;
+	margin: 0 .5rem;
+	display: flex;
+	justify-content: space-between;
+}
+.header-nav a{
+	color: #999999;
+}
+#headercolor{
+	color: orange;
+}
+.header-search{
+	height: .8rem;
+	border-left: 1px solid #F0F0F0;
+	border-right: 1px solid #F0F0F0;
+}
+.header-search input{
+	outline: none;
+	border-style: none;
+	background-color: transparent;
+	line-height: .8rem;
+	margin-left: .1rem;
+}
+.header-login span a{
+	margin: .05rem;
+	font-size: .16rem;
+	color: #999999;
+}
+/* ############################## */
+.con{
+	margin: 0 auto;
+	margin-top: .8rem;
+	width: 11rem;
+	display: flex;
+	justify-content: space-between;
+}
+#article-con{
+	width: 8.5rem;
+	/* background-color: #EDEDED; */
+}
+.article-hot{
+	width: 1.8rem;
+	margin-top: .5rem;
+}
+/* ############## */
+#article-tab{
+	position: fixed;
+	top: .8rem;
+	z-index: 9999;
+	width: 8.5rem;
+	font-size: .18rem;
+	color: black;
+	background-color: rgba(240,240,240,.9);
+	display: flex;
+	justify-content: space-between;
+	padding: .05rem .5rem;
+	box-sizing: border-box;
+	cursor:pointer;
+}
+.article-list{
+	margin-top: 0.5rem;
+	display: flex;
+	flex-wrap: wrap;
+}
+.list-con{
+	position: relative;
+	margin-right: .3rem;
+	width: 2.5rem;
+	border: 1px solid #F0F0F0;
+	border-radius: .08rem;
+	margin-bottom: .3rem;
+	overflow: hidden;
+	transition: 300ms ;
+}
+.list-con:hover{
+	box-shadow:0.00rem 0.00rem 0.1rem  rgba(0,0,0,0.1);
+	transition: 300ms ;
+}
+.list-con-img{
+	width: 2.5rem;
+	height: 2.5rem;
+	cursor: pointer;
+	filter: brightness(80%);
+	transition: 300ms;
+}
+.list-con-img:hover{
+	filter: brightness(100%);
+	transition: 300ms;
+}
+.list-con-tab{
+	position: absolute;
+	top: 0;
+	font-size: .15rem;
+	color: white;
+	padding: .05rem .1rem;
+	margin: .1rem;
+	background-color: rgb(0,0,0,.5);
+	border-radius: .5rem;
+}
+.list-con-title{
+	font-size: .18rem;
+	padding: .05rem;
+	height: .45rem;
+}
+.list-con-title a{
+	color: black;
+}
+.list-con-reader{
+	display: flex;
+	align-items: center;
+	padding: .05rem;
+	font-size: .15rem;
+}
+.list-con-reader img{
+	width: .3rem;
+	height: .3rem;
+	border-radius: .5rem;
+}
+.list-con-reader p:nth-of-type(1){
+	padding: 0 .05rem;
+}
+.list-con-reader p:nth-of-type(1) a{
+	color: #999999;
+}
+.list-con-reader p:nth-of-type(2){
+	color: #CCCCCC;
+}
+.zan{
+	border-top: 1px solid #CCCCCC;
+	font-size: .2rem;
+	line-height: .3rem;
+	display: flex;
+	justify-content: space-around;
+}
+.tabli{
+	color: orange;
+}
+.hide{
+	display: none;
+}
+.show{
+	display: show;
+}
+/* ################# */
+.hot-news{
+	font-size: .2rem;
+}
+.hot-list{
+	position: relative;
+	width: 1.8rem;
+	height: 1.8rem;
+	margin-top: .1rem;
+	transition: 300ms ;
+}
+.hot-list:hover{
+	box-shadow:0.00rem 0.00rem 0.1rem  rgba(0,0,0,0.1);
+	transition: 300ms ;
+}
+.hot-list img{
+	width: 1.8rem;
+	height: 1.8rem;
+	filter: brightness(80%);
+	transition: 300ms;
+}
+.hot-list img:hover{
+	filter: brightness(100%);
+	transition: 300ms;
+}
+.top{
+	position: absolute;
+	top: 0;
+	font-size: .15rem;
+	color: white;
+	width: .6rem;
+	background-color: red;
+}
+.title{
+	position: absolute;
+	bottom: 0;
+	font-size: .15rem;
+	color: white;
+	width: 1.8rem;
+	line-height: .3rem;
+	text-align: center;
+	background-color: rgba(0,0,0,.5);
+}
+.end{
+	margin-top: .3rem;
+	background-color: #F0F0F0;
+	height: .5rem;
+}
+.end ul{
+	display: flex;
+	justify-content: space-between;
+	width: 5rem;
+	margin: 0 auto;
+}
+.end ul li{
+	font-size: .18rem;
+	line-height: .5rem;
+}
+.end ul li a{
+	color: black;
+}

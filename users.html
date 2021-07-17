@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1, minimum-scale=1">
+		<title>个人主页</title>
+		<script>
+			var deviceWidth = document.documentElement.clientWidth;
+			if(deviceWidth > 750) 
+			deviceWidth = 750; 
+			document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+		</script>
+		<link rel="stylesheet" type="text/css" href="css/my.css" />
+	</head>
+	<body>
+		<div class="header">
+			<div class="header-con">
+				<div class="header-icon">Share</div>
+				<ul class="header-nav">
+					<li><a href="index.html">首页</a></li>
+					<li><a href="article.html?id=1">文章</a></li>
+					<li><a href="product.html">产品</a></li>
+					<li><a href="my.html">我的</a></li>
+				</ul>
+				<form class="header-search" onsubmit="return soso()" action="soso.html" method="get">
+					<input type="text" id="socon" name="socon" placeholder="查询内容~~" />
+				</form>
+				<script>
+					function soso(){
+						var socon=document.getElementById("socon").value;
+						if(socon==""){ 
+							alert("请输入要搜索的内容~");
+							return false;
+						}
+					}
+				</script>
+				<div class="header-login">
+					<span class="header-login"><a href="login.html">登录</a></span>
+					<span class="header-regist"><a href="regist.html">注册</a></span>
+				</div>
+			</div>
+		</div>
+		<div class="con">
+			<div class="myname" id="uname">
+				<img src="img/pic/pic%20(1).png" />
+				<p>用户名字</p>
+				<div class="myxx">
+					<ul>
+						<li>9</li>
+						<li>粉丝</li>
+					</ul>
+					<ul>
+						<li>10</li>
+						<li>文章</li>
+					</ul>
+					<ul>
+						<li>10</li>
+						<li>关注</li>
+					</ul>
+				</div>
+			</div>
+			<div class="mylist">
+				<ul class="list-title">
+					<li>文章</li>
+					<li>更多</li>
+				</ul>
+				<div class="list-conn" id="ucon">
+					<div class="list-xx">
+						<img src="img/test/panst_007.png" />
+						<p>这里是文章的题目这里是文章的题目</p>
+						<ul>
+							<li>赞</li>
+							<li>评论</li>
+							<li>3-21</li>
+						</ul>
+					</div>
+					<div class="list-xx">
+						<img src="img/test/panst_007.png" />
+						<p>这里是文章的题目这里是文章的题目</p>
+						<ul>
+							<li>赞</li>
+							<li>评论</li>
+							<li>3-21</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="mylist">
+				<ul class="list-title">
+					<li>评价</li>
+					<li>更多</li>
+				</ul>
+				<div class="list-conn">
+					<div class="chping">
+						<img src="img/product-item/2/mini2.jpg" />
+						<div class="chping_right">
+							<p>三星S10</p>
+							<p>安卓机皇，不用多说，谁同意谁反对。</p>
+						</div>
+					</div>
+					<div class="chping">
+						<img src="img/article/4/mini4.jpg" />
+						<div class="chping_right">
+							<p>OnePlus 7</p>
+							<p>一流屏幕，顶级性能，买买买</p>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<script src="js/jQuery-3.3.1.js"></script>
+			<script>
+				var curl=window.location.href;
+				var spstr=curl.split("?"); 
+				var id=spstr[spstr.length-1];
+				
+				var url="js/users.php?"+id;
+				$.ajax({
+					type:"get",
+					url:url,
+					dataType:'json',
+					async:true,
+					success:function(res){
+						console.log(res);
+						var str="";	
+						var ucon="";
+						var uname=document.getElementById("uname");
+						var uconn=document.getElementById("ucon");
+						$.each(res,function(i,item){
+							
+							
+							ucon+="<div class='list-xx'>"
+							ucon+="<img src="+item.aimg+" />"
+							ucon+="<p>"+item.atitle+"</p>"
+							ucon+="<ul><li>赞</li><li>评论</li><li>"+item.atime+"</li></ul>"
+							ucon+="</div>"
+							uconn.innerHTML=ucon;
+						});	
+						for(i=0;i<1;i++){
+							str+="<img src="+res[0].userpic+" />"
+							str+="<p>"+res[0].username+"</p>"
+							str+="<div class='myxx'><ul><li>"+res[0].fin+"</li><li>粉丝</li></ul>"
+							str+="<ul><li>"+res[0].love+"</li><li>收藏</li></ul>"
+							str+="<ul><li>"+res[0].ping+"</li><li>评论</li></ul>"
+							str+="</div>"
+							
+							uname.innerHTML=str;
+						}
+					}
+				})
+			</script>
+		</div>
+		<div class="end">
+			<ul>
+				<li><a href="#">网站信息</a></li>
+				<li><a href="#">问题反馈</a></li>
+				<li><a href="#">联系我们</a></li>
+				<li><a href="#">加入我们</a></li>
+			</ul>
+		</div>
+	</body>
+</html>

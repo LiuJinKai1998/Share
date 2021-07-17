@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1, minimum-scale=1">
+		<title>产品详情页</title>
+		<script>
+			var deviceWidth = document.documentElement.clientWidth;
+			if(deviceWidth > 750) 
+			deviceWidth = 750; 
+			document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+		</script>
+		<link rel="stylesheet" type="text/css" href="css/product_item.css"  />
+		<script src="js/jQuery-3.3.1.js"></script>
+	</head>
+	<body>
+		<div class="header">
+			<div class="header-con">
+				<div class="header-icon">LOGO</div>
+				<ul class="header-nav">
+					<li><a href="index.html">首页</a></li>
+					<li><a href="article.html?id=1">文章</a></li>
+					<li><a href="product.html">产品</a></li>
+					<li><a href="my.html">我的</a></li>
+				</ul>
+				<form class="header-search" onsubmit="return soso()" action="soso.html" method="get">
+					<input type="text" id="socon" name="socon" placeholder="查询内容~~" />
+				</form>
+				<script>
+					function soso(){
+						var socon=document.getElementById("socon").value;
+						if(socon==""){ 
+							alert("请输入要搜索的内容~");
+							return false;
+						}
+					}
+				</script>
+				<div class="header-login">
+					<span class="header-login"><a href="login.html">登录</a></span>
+					<span class="header-regist"><a href="#">注册</a></span>
+				</div>
+			</div>
+		</div>
+		<div class="con">
+			<div id="con_left">
+				<div class="pro_title" id="pro">
+					<img src="img/test/panst_001.png" />
+					<ul>
+						<li>这是产品的名字：索尼XP2手机，全球第一台32:9的手机，8K+10bitHRDR屏幕</li>
+						<li>索尼Xperia 1是索尼公司于2019年2月25日在西班牙巴塞罗那的MWC2019大会上发布了一款智能手机，曾被称为“XZ4”，采用了21:9比例的带鱼屏设计。</li>
+						<li>
+							<span>200想要</span>
+							<span>200关注</span>
+							<span>200已购</span>
+						</li>
+					</ul>
+				</div>
+				<div class="canshu" id="json">
+					<h1>产品介绍</h1>
+					<h2>外观设计：</h2>
+					<p>外形上，Xperia 1 延续了此前的表面张力设计，这种设计理念可以有效地化解手机厚度对手感的影响，但最令人兴奋的是，Xpeia Z5 系列上的侧边指纹传感器正式回归 Xperia 旗舰机型中。Xperia 1 与本次共同发布的 Xperia 10 系列都使用了深受用户喜爱的侧边指纹传感器，一改以往摸镜头的窘况。同时手机也通过了 IP68 防护认证，在户外使用时不用担心意外进水的问题。</p>
+					<div class="proimg">
+						<img src="img/test/panst_034.png" />
+					</div>
+					<h2>硬件参数：</h2>
+					<p>索尼Xperia 1搭载骁龙855处理器，配备6GB内存、128GB存储。该机采用侧面指纹识别设计，支持IP68防护。搭载后置三摄像头，均为1200万像素，其中包括一个26mm广角镜头（支持光学防抖）、一个52mm长焦镜头（支持光学防抖）、一个16mm超广角镜头。其他方面，该机配备3300mAh电池，支持杜比Dolby Atmos立体声，支持HiRes音效，支持PD3.0快充。</p>
+					<h2>价格参考：</h2>
+					<div class="price">
+						<p>4999</p>
+					</div>
+				</div>
+				<div class="zancai" id="zan">
+					<p style="flex-grow: 25;">赞25%</p>
+					<p style="flex-grow: 75;">踩75%</p>
+				</div>
+				<div class="xiangguan">
+					<h1>相关文章:</h1>
+					<div id="xiangguan">
+						<div class="xiangguan-con">
+							<img src="img/test/panst_034.png" />
+							<a href="#">
+							<ul>
+								<li>tile</li>
+								<li>conconconconconconconconconconconconconconconconconconcon</li>
+								<li>name time</li>
+							</ul>
+							</a>
+						</div>
+					</div>
+				</div>
+				<script>
+					var curl=window.location.href;
+					var spstr=curl.split("?"); 
+					var id=spstr[spstr.length-1];
+					
+					var url="js/product_item.php?"+id;
+					var urlxg="js/product_item-xg.php?"+id;
+					var urlwr="js/product_item-wr.php?"+id;
+					$.ajax({
+						type:"get",
+						url:url,
+						dataType:'json',
+						async:true,
+						success:function(res){
+							// console.log(res);
+							console.log(res[0].pjson);
+							var str="";	
+							var xgcon="";
+							var div=document.getElementById("pro");
+							$.ajax({
+								type:"get",
+								url:res[0].pjson,
+								dataType:'json',
+								async:true,
+								success:function(res){
+									console.log(res);
+									var str="";	
+									var con="";	
+									var zan="";
+									var div=document.getElementById("json");
+									var ping=document.getElementById("pingcon");
+									var zancai=document.getElementById("zan");
+									$.each(res,function(i,item){
+										str+="<h1>产品介绍:</h1>"
+										for(i=0;i<item.con1.length;i++){
+											str+="<p class='left_con'>"+item.con1[i].p+"</p>"
+										}
+										for(i=0;i<item.conimg1.length;i++){
+											str+="<div class='left_conimg'>"+
+											"<img class='left_conimg1' src="+item.conimg1[i].img+" />"+"</div>"
+										}
+										str+="<h1>外观设计：</h1>"
+										for(i=0;i<item.con2.length;i++){
+											str+="<p class='left_con'>"+item.con2[i].p+"</p>"
+										}
+										for(i=0;i<item.conimg2.length;i++){
+											str+="<div class='left_conimg'>"+
+											"<img class='left_conimg1' src="+item.conimg2[i].img+" />"+"</div>"
+										}
+										str+="<h2>硬件参数：</h2>"
+										for(i=0;i<item.con3.length;i++){
+											str+="<p class='left_con'>"+item.con3[i].p+"</p>"
+										}
+										for(i=0;i<item.conimg3.length;i++){
+											str+="<div class='left_conimg'>"+
+											"<img class='left_conimg1' src="+item.conimg3[i].img+" />"+"</div>"
+										}
+										str+="<h2>价格参考：</h2>"
+										for(i=0;i<item.con4.length;i++){
+											str+="<p class='left_con'>"+item.con4[i].p+"</p>"
+										}
+										
+										//赞踩
+										zan+="<p style='flex-grow: "+item.zancai.zan+";'>赞"+item.zancai.zan+"%</p>"
+										zan+="<p style='flex-grow: "+item.zancai.cai+";'>踩"+item.zancai.cai+"%</p>"
+										//评论内容
+										for(i=0;i<item.ping.length;i++){
+											con+="<div class='otherping'>"
+											con+="<img src="+item.ping[i].pcon.pic+" />"
+											con+="<ul><li>"+item.ping[i].pcon.name+"</li>"
+											con+="<li>"+item.ping[i].pcon.con+"</li>"
+											con+="<li><span>"+item.ping[i].pcon.time+"</span>"
+											con+="<span>赞："+item.ping[i].pcon.zan+"</span>"
+											con+="<span>踩："+item.ping[i].pcon.cai+"</span>"
+											con+="</li>"
+											con+="</div>"
+										}
+										
+										
+									});
+									div.innerHTML=str;
+									ping.innerHTML=con;
+									zancai.innerHTML=zan;
+								}
+							})
+							$.each(res,function(i,item){
+								str+="<img src="+item.pimg+" />"
+								str+="<ul><li>"+item.pname+"</li>"
+								str+="<li>"+item.pcon+"</li>"
+								str+="<li><span>"+item.want+"想要</span><span>"+item.love+"关注</span><span>"+item.buy+"已购</span></li>"
+								str+="</ul>"
+								div.innerHTML=str;
+								
+							});	
+						}
+					})
+					
+					$.ajax({
+						type:"get",
+						url:urlwr,
+						dataType:'json',
+						cache:false,
+						async:true,
+						success:function(res){
+							console.log(res);
+							var xgcon="";	
+							var xg=document.getElementById("xiangguan");
+							$.each(res,function(i,item){
+								
+								xgcon+="<div class='xiangguan-con'>"
+								xgcon+="<img src="+item.aimg+" />"
+								xgcon+="<a href='article_item.html?id="+item.aid+"'><ul>"
+								xgcon+="<li>"+item.atitle+"</li>"
+								xgcon+="<li>"+item.acon+"</li>"
+								xgcon+="<li>"+item.aname+item.atime+"</li>"
+								xgcon+="</ul></a></div>"
+								
+							});	
+							xg.innerHTML=xgcon;
+						}
+					});
+					
+					$.ajax({
+						type:"get",
+						url:urlxg,
+						dataType:'json',
+						cache:false,
+						async:true,
+						success:function(res){
+							console.log(res);
+							var str="";	
+							var div=document.getElementById("xg");
+							for(i=0;i<2;i++){
+								str+="<ul class='hot-list'>"
+								str+="<a href='product_item.html?id="+res[i].pid+"'><img src="+res[i].pimg+" ></a>"
+								str+="<p class='title'>"+res[i].pname+"</p>"
+								str+="</ul>"
+							}
+							div.innerHTML=str;
+						}
+					});
+					
+				</script>
+				<div class="ping">
+					<div class="pingcon">
+						<div class="pingcon-input">
+							<img src="img/test/panst_034.png" />
+							<input type="text" id="txt" class="pingtext" placeholder="一起来讨论吧" />
+						</div>
+						<div class="pingbutton">
+							<p>输入了<span id="txtmath">0</span>个字</p>
+							<input type="button" value="提交" onclick="ping()" />
+						</div>
+					</div>
+					<script>
+						function ping(){//添加评论
+							var time0=new Date().toLocaleDateString();
+							var time=new Date().toLocaleTimeString(); 
+							var input=document.getElementById('txt');
+							var list=document.getElementById('pingnew');
+							var div=document.createElement('div');//创建节点
+							$(list).append($("#ping-li").clone());
+							// var html='<p class="ping-con">'+input.value+'</p>';
+							var html='<div class="otherping"><img src="img/pic/pic%20(10).png" /><ul><li>name</li><li>'+input.value+'</li><li><span>'+time0+time+'</span><span>赞</span><span>评论</span><span onclick="del(this)">删除</span></li></ul></div>'
+							div.innerHTML=html;
+							list.appendChild(div);
+							input.value='';	
+						}
+						function del(el){//删除评论
+							var div=el.parentNode.parentNode.parentNode;
+							div.parentNode.removeChild(div);
+						}
+					</script>
+					<script>  
+						window.onload=function(){
+							var txt=document.getElementById('txt');
+							var txtmath=document.getElementById('txtmath');
+							//计算字数
+							txt.onkeyup=function(){
+								txtmath.innerHTML=this.value.length;
+							}
+						}
+					</script>
+					<div class="otherpingcon" id="pingcon"></div>
+					<div id="pingnew"></div>
+				</div>
+				
+			</div>
+			<div id="con_right">
+				<div class="hot-news">
+					<p>相似产品</p>
+					<div id="xg">
+						<ul class="hot-list">
+							<a href="#"><img src="img/test/panst_004.png" ></a>
+							<p class="title">创维 AWE 2019 展台：全品类智能家电齐上阵</p>
+						</ul>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="end">
+			<ul>
+				<li><a href="#">网站信息</a></li>
+				<li><a href="#">问题反馈</a></li>
+				<li><a href="#">联系我们</a></li>
+				<li><a href="#">加入我们</a></li>
+			</ul>
+		</div>
+	</body>
+</html>

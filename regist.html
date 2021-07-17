@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1, minimum-scale=1">
+		<title>注册</title>
+		<script>
+			var deviceWidth = document.documentElement.clientWidth;
+			if(deviceWidth > 750) 
+			deviceWidth = 750; 
+			document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+		</script>
+		<link type="text/css" rel="stylesheet" href="css/login.css"  />
+	</head>
+	<body>
+		<div class="header">
+			<div class="header-con">
+				<div class="header-icon">Share</div>
+				<ul class="header-nav">
+					<li><a href="index.html">首页</a></li>
+					<li><a href="article.html?id=1">文章</a></li>
+					<li><a href="product.html">产品</a></li>
+					<li><a href="my.html">我的</a></li>
+				</ul>
+				<form class="header-search" onsubmit="return soso()" action="soso.html" method="get">
+					<input type="text" id="socon" name="socon" placeholder="查询内容~~" />
+				</form>
+				<script>
+					function soso(){
+						var socon=document.getElementById("socon").value;
+						if(socon==""){ 
+							alert("请输入要搜索的内容~");
+							return false;
+						}
+					}
+				</script>
+				<div class="header-login">
+					<span class="header-login"><a href="login.html">登录</a></span>
+					<span class="header-regist"><a href="regist.html">注册</a></span>
+				</div>
+			</div>
+		</div>
+		<div class="login">
+			<p class="title">注册</p>
+			<form class="form1" action="js/regist.php" method="post" onsubmit="return register()">
+				<input class="username" id="name" type="username" name="username" placeholder="用户名" />
+				<p class="tishi">请输入只有英文字母的用户名</p>
+				<input class="username" id="phone" placeholder="手机号" />
+				<p class="tishi">请输入手机号</p>
+				<input type="text" id="yanzheng" class="value" placeholder="验证码" value=""><input class="yan" onclick="settime(this)" type="button" value="获取验证码"></input>
+				<p class="tishi">请输入4位数字验证码</p>
+				<input class="password" id="password" type="password" name="password" placeholder="密码" /><br />
+				<p class="tishi">输入6-16位数字和字母</p>
+				<div class="login_tiao"><a href="login.html">已有账号？点击登录</a><a href="#">找回密码</a></div><br />
+				<input class="denglu" type="submit" name="submit"  value="注册"/>
+			</form>
+		</div>
+		<script>  
+			var countdown=60;
+			function settime(val) {
+			    if (countdown == 0) {
+			        val.removeAttribute("disabled");
+			        val.value="获取验证码";
+			        countdown = 60;
+			    } else {
+			        val.setAttribute("disabled", true);
+			        val.value="重新发送(" + countdown + ")";
+			        countdown--;
+			        setTimeout(function() {
+			            settime(val)
+			        },1000)
+			    }
+				 
+			}
+			function register(){
+					var name=document.getElementById("name").value;
+					var phone=document.getElementById("phone").value;
+					var password=document.getElementById("password").value;
+					var yanzheng=document.getElementById("yanzheng").value;
+					if(!(/^[A-Za-z]+$/.test(name))){ 
+						alert("请输入只有英文字母的用户名");
+						return false;
+					}
+					if(!(/^1[34578]\d{9}$/.test(phone))){ 
+						alert("手机号码有误，请重新输入");
+						return false;
+					}
+					if(!(/^\d{4,4}$/.test(yanzheng))){ 
+						alert("输入4位验证码");
+						return false;
+					}
+					if(!(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/.test(password))){ 
+						alert("输入6-16位数字和字母");
+						return false;
+					}
+				}
+		</script>
+	</body>
+</html>

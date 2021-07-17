@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1, minimum-scale=1">
+		<title>产品列表页</title>
+		<script>
+			var deviceWidth = document.documentElement.clientWidth;
+			if(deviceWidth > 750) 
+			deviceWidth = 750; 
+			document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+		</script>
+		<link rel="stylesheet" type="text/css" href="css/product_list.css"  />
+		<script src="js/jQuery-3.3.1.js"></script>
+	</head>
+	<body>
+		<div class="header">
+			<div class="header-con">
+				<div class="header-icon">Share</div>
+				<ul class="header-nav">
+					<li><a href="index.html">首页</a></li>
+					<li><a href="article.html?id=1">文章</a></li>
+					<li><a id="headercolor" href="product.html">产品</a></li>
+					<li><a href="my.html?id=1">我的</a></li>
+				</ul>
+				<form class="header-search" onsubmit="return soso()" action="soso.html" method="get">
+					<input type="text" id="socon" name="socon" placeholder="查询内容~~" />
+				</form>
+				<script>
+					function soso(){
+						var socon=document.getElementById("socon").value;
+						if(socon==""){ 
+							alert("请输入要搜索的内容~");
+							return false;
+						}
+					}
+				</script>
+				<div class="header-login">
+					<span class="header-login"><a href="login.html">登录</a></span>
+					<span class="header-regist"><a href="regist.html">注册</a></span>
+				</div>
+			</div>
+		</div>
+		<div class="con">
+			<div id="con_left">
+				<div class="title">
+					<p id="wei" class="weizhi">当前位置：产品列表 ></p>
+						<ul class="tabcon">
+							<li><a href="product_list.html?id=1" id="tab1">数码</a></li>
+							<a href="product_list.html?id=2"><li>生活</li></a>
+							<a href="product_list.html?id=3"><li>时尚</li></a>
+							<a href="product_list.html?id=4"><li>玩物</li></a>
+							<a href="product_list.html?id=5"><li>其他</li></a>
+						</ul>
+				</div>
+				<div id="procon">
+					<!-- <div class="prolist">
+						<img src="img/test/panst_004.png" />
+						<ul>
+							<a href="product_item.html">
+								<li>索尼Xperia 1</li>
+								<li>索尼Xperia 1是索尼公司于2019年2月25日在西班牙巴塞罗那的MWC2019大会上发布了一款智能手机，曾被称为“XZ4”，采用了21:9比例的带鱼屏设计。</li>
+								<li>
+									<span>100人关注</span>
+									<span>15篇文章</span>
+									<span>200条评价</span>
+								</li>
+							</a>
+						</ul>
+						<p>家具</p>
+					</div>
+					<div class="prolist">
+						<img src="img/test/panst_004.png" />
+						<ul>
+							<a href="#">
+								<li>索尼Xperia 1</li>
+								<li>索尼Xperia 1是索尼公司于2019年2月25日在西班牙巴塞罗那的MWC2019大会上发布了一款智能手机，曾被称为“XZ4”，采用了21:9比例的带鱼屏设计。</li>
+								<li>
+									<span>100人关注</span>
+									<span>15篇文章</span>
+									<span>200条评价</span>
+								</li>
+							</a>
+						</ul>
+						<p>家具</p>
+					</div>
+					<div class="prolist">
+						<img src="img/test/panst_004.png" />
+						<ul>
+							<a href="#">
+								<li>索尼Xperia 1</li>
+								<li>索尼Xperia 1是索尼公司于2019年2月25日在西班牙巴塞罗那的MWC2019大会上发布了一款智能手机，曾被称为“XZ4”，采用了21:9比例的带鱼屏设计。</li>
+								<li>
+									<span>100人关注</span>
+									<span>15篇文章</span>
+									<span>200条评价</span>
+								</li>
+							</a>
+						</ul>
+						<p>家具</p>
+					</div> -->
+				</div>
+				<script>
+					$(function(){
+						var curl=window.location.href;
+						var spstr=curl.split("?"); 
+						var id=spstr[spstr.length-1];
+						var url="js/product.php?"+id;
+						
+						var weiid=id[id.length-1];
+						var wei=document.getElementById("wei");
+						if(weiid==1){
+							wei.innerHTML="当前位置：产品列表 >数码";
+						}else if(weiid==2){
+							wei.innerHTML="当前位置：产品列表 >生活";
+						}else if(weiid==3){
+							wei.innerHTML="当前位置：产品列表 >时尚";
+						}else if(weiid==4){
+							wei.innerHTML="当前位置：产品列表 >玩物";
+						}else if(weiid==5){
+							wei.innerHTML="当前位置：产品列表 >其他";
+						}
+						
+						function tabcon(){
+							$.ajax({
+								type:"get",
+								url:url,
+								dataType:'json',
+								cache:false,
+								async:true,
+								success:function(res){
+									console.log(res);
+									var str="";	
+									var div=document.getElementById("procon");
+									
+									$.each(res,function(i,item){
+										str+="<div class='prolist'>"
+										str+="<img src="+item.pimg+" /><ul>"
+										str+="<a href='product_item.html?id="+item.pid+"'><li>"+item.pname+"</li>"
+										str+="<li>"+item.pcon+"</li>"
+										str+="<li><span>"+item.want+"想要</span><span>"+item.love+"关注</span><span>"+item.love+"已购</span></li>"
+										
+										str+="</a></ul>"
+										str+="<p>"+item.pclassname+"</p>"
+										str+="</div>"
+										
+										div.innerHTML=str;
+										
+									});	
+									
+								
+										
+									
+								}
+							});
+						}
+					tabcon();
+					
+						
+					
+				
+					
+				})
+				</script>
+			</div>
+			<!-- <div id="con_right">
+				<h1>类似产品</h1>
+				<div class="pro_id">
+					<a href="#"><img src="img/test/panst_004.png" /></a>
+					<a href="#"><p>SONY VGP-WKB14</p></a>
+				</div>
+				<div class="pro_id">
+					<a href="#"><img src="img/test/panst_004.png" /></a>
+					<a href="#"><p>SONY VGP-WKB14</p></a>
+				</div>
+				<div class="pro_id">
+					<a href="#"><img src="img/test/panst_004.png" /></a>
+					<a href="#"><p>SONY VGP-WKB14</p></a>
+				</div>
+			</div> -->
+		</div>
+		<div class="end">
+			<ul>
+				<li><a href="#">网站信息</a></li>
+				<li><a href="#">问题反馈</a></li>
+				<li><a href="#">联系我们</a></li>
+				<li><a href="#">加入我们</a></li>
+			</ul>
+		</div>
+	</body>
+</html>

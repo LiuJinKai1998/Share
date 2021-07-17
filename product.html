@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1, minimum-scale=1">
+		<title>产品栏目页</title>
+		<script>
+			var deviceWidth = document.documentElement.clientWidth;
+			if(deviceWidth > 750) 
+			deviceWidth = 750; 
+			document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+		</script>
+		<link rel="stylesheet" type="text/css" href="css/product.css"  />
+	</head>
+	<body>
+		<div class="header">
+			<div class="header-con">
+				<div class="header-icon">Share</div>
+				<ul class="header-nav">
+					<li><a href="index.html">首页</a></li>
+					<li><a href="article.html?id=1">文章</a></li>
+					<li><a id="headercolor" href="product.html">产品</a></li>
+					<li><a href="my.html?id=1">我的</a></li>
+				</ul>
+				<form class="header-search" onsubmit="return soso()" action="soso.html" method="get">
+					<input type="text" id="socon" name="socon" placeholder="查询内容~~" />
+				</form>
+				<script>
+					function soso(){
+						var socon=document.getElementById("socon").value;
+						if(socon==""){ 
+							alert("请输入要搜索的内容~");
+							return false;
+						}
+					}
+				</script>
+				<div class="header-login">
+					<span class="header-login"><a href="login.html">登录</a></span>
+					<span class="header-regist"><a href="regist.html">注册</a></span>
+				</div>
+			</div>
+		</div>
+		<div class="con">
+			<div id="classlist">
+				<div class="biglist">
+				<ul>
+					<p>全部产品分类</p>
+					<li>
+						<a href="product_list.html?id=1">数码</a>
+						<ul class="minlist">
+							<li><a href="#">手机</a></li>
+							<li><a href="#">电脑</a></li>
+							<li><a href="#">生活用品</a></li>
+							<li><a href="#">拍照摄影</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="product_list.html?id=2">生活</a>
+						<ul class="minlist">
+							<li><a href="#">家具饰品</a></li>
+							<li><a href="#">厨房用具</a></li>
+							<li><a href="#">灯具装饰</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="product_list.html?id=3">时尚</a>
+						<ul class="minlist">
+							<li><a href="#">男生穿衣</a></li>
+							<li><a href="#">女生穿衣</a></li>
+							<li><a href="#">化妆护肤</a></li>
+							<li><a href="#">背包饰品</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="product_list.html?id=4">玩物</a>
+						<ul class="minlist">
+							<li><a href="#">发现美食</a></li>
+							<li><a href="#">ACG周边</a></li>
+							<li><a href="#">小物品</a></li>
+							<li><a href="#">游戏</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="product_list.html?id=5">其他</a>
+						<ul class="minlist">
+							<li><a href="#">文具用品</a></li>
+							<li><a href="#">办公用品</a></li>
+							<li><a href="#">应用软件</a></li>
+						</ul>
+					</li>
+				</ul>
+				</div>
+			</div>
+			<div class="prolist">
+				<div class="prolist-con">
+					<div class="prolist-con-name">
+						<img src="img/product/shu/shu.jpg" />
+						<div class="prolist-con-class">
+							<p class="classname"><a href="product_list.html?id=1">数码</a></p>
+							<div class="classname-list">
+								<p><a href="#">手机</a></p>
+								<p><a href="#">电脑</a></p>
+								<p><a href="#">生活用品</a></p>
+							</div>
+						</div>
+					</div>
+					<ul class="prolist-con-jeishao">
+						<li>分类介绍:</li>
+						<li>生活区分类包括：生活用品等</li>
+						<div class="calssimg">
+							<img src="img/product/shu/shu-con1.jpg" />
+							<img src="img/product/shu/shu-con2.jpg" />
+							<img src="img/product/shu/shu-con3.jpg" />
+							<img src="img/product/shu/shu-con4.jpg" />
+							<img src="img/product/shu/shu-con5.jpg" />
+							<img src="img/product/shu/shu-con6.jpg" />
+						</div>
+					</ul>
+				</div>
+				<div class="prolist-con">
+					<div class="prolist-con-name">
+						<img src="img/product/live/live.jpg" />
+						<div class="prolist-con-class">
+							<p class="classname"><a href="product_list.html?id=2">生活</a></p>
+							<div class="classname-list">
+								<p><a href="#">家具饰品</a></p>
+								<p><a href="#">厨房用具</a></p>
+								<p><a href="#">灯具装饰</a></p>
+							</div>
+						</div>
+					</div>
+					<ul class="prolist-con-jeishao">
+						<li>分类介绍:</li>
+						<li>生活区分类包括：生活用品等</li>
+						<div class="calssimg">
+							<img src="img/product/live/live-con1.jpg" />
+							<img src="img/product/live/live-con2.jpg" />
+							<img src="img/product/live/live-con3.jpg" />
+							<img src="img/product/live/live-con4.jpg" />
+							<img src="img/product/live/live-con5.jpg" />
+							<img src="img/product/live/live-con6.jpg" />
+						</div>
+					</ul>
+				</div>
+				<div class="prolist-con">
+					<div class="prolist-con-name">
+						<img src="img/product/shi/shi.jpg" />
+						<div class="prolist-con-class">
+							<p class="classname"><a href="product_list.html?id=3">时尚</a></p>
+							<div class="classname-list">
+								<p><a href="#">男生穿衣</a></p>
+								<p><a href="#">女生穿衣</a></p>
+								<p><a href="#">化妆护肤</a></p>
+							</div>
+						</div>
+					</div>
+					<ul class="prolist-con-jeishao">
+						<li>分类介绍:</li>
+						<li>生活区分类包括：生活用品等</li>
+						<div class="calssimg">
+							<img src="img/product/shi/shi-con1.jpg" />
+							<img src="img/product/shi/shi-con2.jpg" />
+							<img src="img/product/shi/shi-con3.jpg" />
+							<img src="img/product/shi/shi-con4.jpg" />
+							<img src="img/product/shi/shi-con5.jpg" />
+							<img src="img/product/shi/shi-con6.jpg" />
+						</div>
+					</ul>
+				</div>
+				<div class="prolist-con">
+					<div class="prolist-con-name">
+						<img src="img/product/wan/wan%20(1).jpg" />
+						<div class="prolist-con-class">
+							<p class="classname"><a href="product_list.html?id=4">玩物</a></p>
+							<div class="classname-list">
+								<p><a href="#">ACG周边</a></p>
+								<p><a href="#">发现美食</a></p>
+								<p><a href="#">小物品</a></p>
+								<p><a href="#">游戏</a></p>
+							</div>
+						</div>
+					</div>
+					<ul class="prolist-con-jeishao">
+						<li>分类介绍:</li>
+						<li>生活区分类包括：生活用品等</li>
+						<div class="calssimg">
+							<img src="img/product/wan/wan%20(1).jpg" />
+							<img src="img/product/wan/wan%20(2).jpg" />
+							<img src="img/product/wan/wan%20(3).jpg" />
+							<img src="img/product/wan/wan%20(4).jpg" />
+							<img src="img/product/wan/wan%20(5).jpg" />
+							<img src="img/product/wan/wan(6).jpg" />
+						</div>
+					</ul>
+				</div>
+				<div class="prolist-con">
+					<div class="prolist-con-name">
+						<img src="img/product/other/other%20(1).jpg" />
+						<div class="prolist-con-class">
+							<p class="classname"><a href="product_list.html?id=5">其他</a></p>
+							<div class="classname-list">
+								<p><a href="#">文具用品</a></p>
+								<p><a href="#">办公用品</a></p>
+								<p><a href="#">应用软件</a></p>
+							</div>
+						</div>
+					</div>
+					<ul class="prolist-con-jeishao">
+						<li>分类介绍:</li>
+						<li>生活区分类包括：生活用品等</li>
+						<div class="calssimg">
+							<img src="img/product/other/other%20(1).jpg" />
+							<img src="img/product/other/other%20(2).jpg" />
+							<img src="img/product/other/other%20(3).jpg" />
+							<img src="img/product/other/other%20(4).jpg" />
+							<img src="img/product/other/other%20(5).jpg" />
+							<img src="img/product/other/other%20(6).jpg" />
+						</div>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="end">
+			<ul>
+				<li><a href="#">网站信息</a></li>
+				<li><a href="#">问题反馈</a></li>
+				<li><a href="#">联系我们</a></li>
+				<li><a href="#">加入我们</a></li>
+			</ul>
+		</div>
+	</body>
+</html>

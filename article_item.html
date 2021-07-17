@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1, minimum-scale=1">
+		<title>文章详情页</title>
+		<script>
+			var deviceWidth = document.documentElement.clientWidth;
+			if(deviceWidth > 750) 
+			deviceWidth = 750; 
+			document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+		</script>
+		<link type="text/css" rel="stylesheet" href="css/article_item.css"  />
+		<script src="js/jQuery-3.3.1.js"></script>
+	</head>
+	<body>
+		<div class="header">
+			<div class="header-con">
+				<div class="header-icon">Share</div>
+				<ul class="header-nav">
+					<li><a href="index.html">首页</a></li>
+					<li><a href="article.html?id=1">文章</a></li>
+					<li><a href="product.html">产品</a></li>
+					<li><a href="my.html?id=1">我的</a></li>
+				</ul>
+				<form class="header-search" onsubmit="return soso()" action="soso.html" method="get">
+					<input type="text" id="socon" name="socon" placeholder="查询内容~~" />
+				</form>
+				<script>
+					function soso(){
+						var socon=document.getElementById("socon").value;
+						if(socon==""){ 
+							alert("请输入要搜索的内容~");
+							return false;
+						}
+					}
+				</script>
+				<div class="header-login">
+					<span class="header-login"><a href="login.html">登录</a></span>
+					<span class="header-regist"><a href="regist.html">注册</a></span>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="mu">
+			<ul class="bigmu">
+				<a href="#">目录</a>
+				<li>
+					<ul>
+						<li>产品介绍</li>
+						<li>使用一个月感受</li>
+						<li>使用两个月感受</li>
+						<li>总结</li>
+					</ul>
+				</li>
+			</ul>
+			<p><a href="#">收藏</a></p>
+			<p><a href="#">评论</a></p>
+		</div> -->
+		<div class="con">
+			<div id="con_left">
+				<div id="title">
+				<!-- <img src="img/article/artice1.jpg" />
+				<ul class="left-name">
+					<li><a href="#">这里是作者</a></li>
+					<li><a href="#">2019-3-19</a></li>
+				</ul> -->
+				</div>
+				<div id="json">
+				<!-- <p class="bigh1">这里是标题这里是标题这里是标题这里是标题</p>
+				<p class="left_con">sony在2014年PC市场最不景气的时候退出了中国市场，当年sony的PC终端市场份额还是很大的，不知道为何sony就不干了，VGP-WKB14是sony当年在一体机上配送的无线键盘，没有独立发售。</p>
+				<h1 id="mu_0">产品介绍：</h1>
+				<p class="left_con">本人的VGP-WKB11用了很多年了，白色的外观在岁月的洗礼下显得有点发黄 ，最近多买了一台电脑，顺便再配一个sony键盘，无线找遍全网也没几个，某宝有些卖得很便宜 ，都是改的山寨接收器的，功能不全不考虑</p>
+				<h1 id="mu_1">使用一个月感受</h1>
+				<p class="left_con">当年的sony笔记本从主力机变成了铺尘机，这几年也购买过一些机械键盘，但那些键盘亮瞎狗眼的灯光氛围灯，硕大的键帽，超长的按键形成，打字敲击的响，对应不玩游戏的我确实无爱。</p>
+				<div class="left_conimg"><img class="left_conimg1" src="img/article/artice2.jpg"></div>
+				<p class="img_p">占地面积大是个问题</p>
+				<h1 id="mu_2">使用两个月感受</h1>
+				<p class="left_con">使用了一个月还可以</p>
+				<p class="left_con">使用了一个月还可以</p>
+				<p class="left_con">使用了一个月还可以</p>
+				<p class="left_con">使用了一个月还可以</p>
+				<p class="left_con">使用了一个月还可以</p>
+				<h1 id="mu_3">总结</h1>
+				<p class="left_con">作为sony大法fans，扎实的做功，WKB11即便过了这么多年，键帽也没一点掉漆的迹象。</p>
+				<p class="left_con">台式机无线键盘最后一个版本是WKB15, 而WKB14目前唯一还能买得到的键盘， 这个键盘sony PC产业最后的辉煌，期待sony的回归，带给我们更多的PC外设。</p> -->
+			
+				</div>
+				<script>
+					var curl=window.location.href;
+					var spstr=curl.split("?"); 
+					var id=spstr[spstr.length-1];
+					
+					var url="js/article_item.php?"+id;
+					$.ajax({
+						type:"get",
+						url:url,
+						dataType:'json',
+						async:true,
+						success:function(res){
+							console.log(res);
+							console.log(res[0].json);
+							var str="";	
+							var rcon="";
+							var div=document.getElementById("title");
+							var right=document.getElementById("con_right");
+							$.ajax({
+								type:"get",
+								url:res[0].json,
+								dataType:'json',
+								async:true,
+								success:function(res){
+									console.log(res);
+									var str="";	
+									var con="";	
+									var div=document.getElementById("json");
+									var ping=document.getElementById("pingcon");
+									$.each(res,function(i,item){
+										str+="<p class='bigh1'>"+item.bigh1+"</p>";
+										// for(i=0;i<item.con0.length;i++){
+										// 	str+="<p class='left_con'>"+item.con0[i].p+"</p>"
+										// }
+										//mu0
+										str+="<h1 id='mu_0'>"+item.mu.mu0+"</h1>"
+										for(i=0;i<item.con1.length;i++){
+											str+="<p class='left_con'>"+item.con1[i].p+"</p>"
+										}
+										for(i=0;i<item.conimg1.length;i++){
+											str+="<div class='left_conimg'>"+
+											"<img class='left_conimg1' src="+item.conimg1[i].img+" />"+"</div>"
+										}
+										//mu1
+										str+="<h1 id='mu_0'>"+item.mu.mu1+"</h1>"
+										for(i=0;i<item.con2.length;i++){
+											str+="<p class='left_con'>"+item.con2[i].p+"</p>"
+										}
+										for(i=0;i<item.conimg2.length;i++){
+											str+="<div class='left_conimg'>"+
+											"<img class='left_conimg1' src="+item.conimg2[i].img+" />"+"</div>"
+										}
+										//mu2
+										str+="<h1 id='mu_0'>"+item.mu.mu2+"</h1>"
+										for(i=0;i<item.con3.length;i++){
+											str+="<p class='left_con'>"+item.con3[i].p+"</p>"
+										}
+										for(i=0;i<item.conimg3.length;i++){
+											str+="<div class='left_conimg'>"+
+											"<img class='left_conimg1' src="+item.conimg3[i].img+" />"+"</div>"
+										}
+										//mu3
+										for(i=0;i<item.con4.length;i++){
+											str+="<p class='left_con'>"+item.con4[i].p+"</p>"
+										}
+										for(i=0;i<item.conimg4.length;i++){
+											str+="<div class='left_conimg'>"+
+											"<img class='left_conimg1' src="+item.conimg4[i].img+" />"+"</div>"
+										}
+										
+										//评论内容
+										for(i=0;i<item.ping.length;i++){
+											con+="<div class='otherping'>"
+											con+="<img src="+item.ping[i].pcon.pic+" />"
+											con+="<ul><li>"+item.ping[i].pcon.name+"</li>"
+											con+="<li>"+item.ping[i].pcon.con+"</li>"
+											con+="<li><span>"+item.ping[i].pcon.time+"</span>"
+											con+="<span>赞："+item.ping[i].pcon.zan+"</span>"
+											con+="<span>踩："+item.ping[i].pcon.cai+"</span>"
+											con+="</li>"
+											con+="</div>"
+										}
+										
+										
+									});
+									div.innerHTML=str;
+									ping.innerHTML=con;
+								}
+							})
+								
+							$.each(res,function(i,item){
+								//文章里面的名字时间信息
+								str+="<img src="+item.aimgbig+" />"
+								str+="<ul class='left-name'><li><a href='#'>"+item.aname+"</a></li><li><a href='#'>"+item.atime+"</a></li></ul>"
+								div.innerHTML=str;
+								//右侧作者信息
+								rcon+="<div class='article_name'><div class='name-top'>"
+								rcon+="<img src="+item.userpic+" />"
+								rcon+="<ul><li><a href='users.html?id="+item.uid+"'>"+item.username+"</a></li>"
+								rcon+="<li><a href='#' id='guanzhu' onclick='guanzhu()'>关注</a></li>"
+								rcon+="</ul></div>"
+								rcon+="<div class='name-bottom'>"
+								rcon+="<ul><a href='#'><li>"+item.love+"</li><li>原创</li></a></ul>"
+								rcon+="<ul><a href='#'><li>"+item.love+"</li><li>原创</li></a></ul>"
+								rcon+="<ul><a href='#'><li>"+item.fin+"</li><li>原创</li></a></ul>"
+								rcon+="<ul><a href='#'><li>"+item.ping+"</li><li>原创</li></a></ul>"
+								rcon+="</div>"
+								rcon+="</div>"
+								//右侧产品信息
+								rcon+="<div class='pro_id'>"
+								rcon+="<img src="+item.pimg+" />"
+								rcon+="<ul><li>"+item.pname+"</li>"
+								rcon+="<li><a href='product_item.html?id="+item.pid+"'>了解详情</a></li>"
+								rcon+="</ul></div>"
+								
+								right.innerHTML=rcon;
+							});	
+						}
+					})
+				</script>
+				
+				<!-- <div class="other">
+					<p><a href="#">上一篇：爱的魔力转圈圈</a></p>
+					<p><a href="#">下一篇：爱的圈圈转魔力</a></p>
+				</div> -->
+				<div class="ping">
+					<div class="pingcon">
+						<div class="pingcon-input">
+							<img src="img/pic/pic%20(10).png" />
+							<input type="text" id="txt" class="pingtext" placeholder="一起来讨论吧" />
+						</div>
+						<div class="pingbutton">
+							<p>输入了<span id="txtmath">0</span>个字</p>
+							<input type="button" value="提交" onclick="ping()" />
+						</div>
+					</div>
+					<script>
+						function ping(){//添加评论
+							var time0=new Date().toLocaleDateString();
+							var time=new Date().toLocaleTimeString(); 
+							var input=document.getElementById('txt');
+							var list=document.getElementById('pingnew');
+							var div=document.createElement('div');//创建节点
+							$(list).append($("#ping-li").clone());
+							var html='<div class="otherping"><img src="img/pic/pic%20(10).png" /><ul><li>name</li><li>'+input.value+'</li><li><span>'+time0+time+'</span><span>赞</span><span>评论</span><span onclick="del(this)">删除</span></li></ul></div>'
+							div.innerHTML=html;
+							list.appendChild(div);
+							input.value='';	
+						}
+						function del(el){//删除评论
+							var div=el.parentNode.parentNode.parentNode;
+							div.parentNode.removeChild(div);
+						}
+					</script>
+					<script>  
+						window.onload=function(){
+							var txt=document.getElementById('txt');
+							var txtmath=document.getElementById('txtmath');
+							//计算字数
+							txt.onkeyup=function(){
+								txtmath.innerHTML=this.value.length;
+							}
+						}
+					</script>
+					<div class="otherpingcon" id="pingcon">
+						<!-- <div class="otherping">
+							<img src="img/pic/pic%20(10).png" />
+							<ul>
+								<li>name</li>
+								<li>pingcon</li>
+								<li>
+									<span>2019/3/28 18:33</span>
+									<span>赞</span>
+									<span>评论</span>
+								</li>
+							</ul>
+						</div> -->
+					</div>
+					<div id="pingnew"></div>
+					
+					
+				</div>
+			</div>
+			<div id="con_right">
+				<div class="article_name">
+					<div class="name-top">
+						<img src="img/pic/pic%20(16).png" />
+						<ul>
+							<li><a href="#">这里是作者</a></li>
+							<li><a href="#" id="guanzhu" onclick="guanzhu()">关注</a></li>
+						</ul>
+					</div>
+					<div class="name-bottom">
+						<ul><a href="#"><li>8</li><li>原创</li></a></ul>
+						<ul><a href="#"><li>200</li><li>粉丝</li></a></ul>
+						<ul><a href="#"><li>1000</li><li>收藏</li></a></ul>
+						<ul><a href="#"><li>10</li><li>评价</li></a></ul>
+					</div>
+				</div>
+				<div class="pro_id">
+					<img src="img/test/panst_001.png" />
+					<ul>
+						<li>明基 i707 家用投影仪</li>
+						<li><a href="#">了解详情</a></li>
+					</ul>
+				</div>
+			</div>
+			<script>
+				function guanzhu(){
+					var guan=document.getElementById("guanzhu").innerHTML;
+					if(guan=="关注"){
+						document.getElementById("guanzhu").innerHTML="已关注";
+					}else{
+						document.getElementById("guanzhu").innerHTML="关注";
+					}
+				}
+			</script>
+		</div>
+		<div class="end">
+			<ul>
+				<li><a href="#">网站信息</a></li>
+				<li><a href="#">问题反馈</a></li>
+				<li><a href="#">联系我们</a></li>
+				<li><a href="#">加入我们</a></li>
+			</ul>
+		</div>
+	</body>
+</html>
